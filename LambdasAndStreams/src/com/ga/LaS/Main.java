@@ -39,21 +39,19 @@ public class Main {
         // HINT: look it up for "LocalDate.of"
        List<Employee> after = employees.stream().filter(employee -> employee.getHireDate().isAfter(LocalDate.of(2012,1,1))).toList();
         System.out.println("After 2012:");
-       printList(after);
+       after.stream().forEach(employee -> System.out.println(employee.getName()));
     }
 
     public void getMaxSalary() {
         // TODO Print the maximum salary of all employees...
-        Employee max = employees.stream().max(Comparator.comparing(Employee::getSalary)).orElse(null);
-        assert max != null;
-        System.out.println("Max Salary: "+max.getSalary());
+        Double max = employees.stream().map(Employee::getSalary).max(Double::compare).orElse(0d);
+        System.out.println("Max Salary: "+max);
     }
 
     public void getMinSalary() {
         // TODO Print the minimum salary of all employees...
-        Employee min = employees.stream().min(Comparator.comparing(Employee::getSalary)).orElse(null);
-        assert min != null;
-        System.out.println("Min Salary: "+min.getSalary());
+        Double min = employees.stream().map(Employee::getSalary).min(Double::compare).orElse(0.0);
+        System.out.println("Min Salary: "+min);
     }
 
     public void getAverageSalaries() {
